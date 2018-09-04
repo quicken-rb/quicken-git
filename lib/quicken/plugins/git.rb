@@ -8,7 +8,6 @@ module Quicken
   module Plugins
     class Git < Quicken::Plugin
       def initialize args
-        args[:path] = Dir.pwd unless args.key? :path
         validate_args args
         parse_path args
         parse_remotes args
@@ -34,7 +33,7 @@ module Quicken
 
       def validate_args args
         @args = args
-        return if args.is_a?(String)
+        return if args.is_a?(String) || bool?(args)
         if args.is_a? Hash
           invalid! unless args[:path].is_a? String
           if args.key? :remote
@@ -51,12 +50,13 @@ module Quicken
       end
 
       def parse_path args
-        @path = args.is_a?(String) ? args : args[:path]
+        return (@path = Dir.pwd) if bool? args
+        @path = args.is_a?(String) ? args : (args[:path] || Dir.pwd)
       end
 
       def parse_remotes args
         @remotes = []
-        return if args.is_a? String
+        return if args.is_a?(String) || bool?(args)
 
         if args.key? :remote
           remote = args[:remote]
@@ -77,6 +77,10 @@ module Quicken
 
       def invalid!
         die "Invalid configuration for Git: #{@args.inspect}"
+      end
+
+      def bool? value
+        [true, false].include? value
       end
     end
   end
