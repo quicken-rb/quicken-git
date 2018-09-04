@@ -1,5 +1,6 @@
 require "bundler/setup"
-require "quicken/git"
+require "quicken/plugins/git"
+require 'pry'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
