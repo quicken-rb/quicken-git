@@ -1,28 +1,42 @@
 # Quicken::Git
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/quicken/git`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Quicken plugin to initialize Git repositories
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'quicken-git'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
 
     $ gem install quicken-git
 
 ## Usage
 
-TODO: Write usage instructions here
+In your `recipe.yml`, add:
+
+```yaml
+# Initialize a repo in the current dir
+
+- git: true
+
+```
+
+```yaml
+# Initialize a repo in a specific dir
+
+- git: /path/to/dir
+
+```
+
+```yaml
+# Initialize a repo with a more complex configuration
+
+- git:
+    path: /path/to/dir                      # default to current dir
+    remote: https://example.com/repo.git    # add the remote as origin
+    # or 
+    remote:                                 # add many remotes
+        origin: https://example.com/repo.git
+        test:   https://example.com/repo.git
+
+```
 
 ## Development
 
