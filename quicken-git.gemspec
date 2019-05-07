@@ -35,5 +35,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "pry"
   spec.add_runtime_dependency "git", "~> 1.5.0"
-  spec.add_runtime_dependency "quicken"
+  spec.add_runtime_dependency "quicken-ruby", '~> 0.1'
 end

@@ -1,5 +1,5 @@
 require 'git'
 
-::Git.configure do |config|
-  
+::Git.configure do |_config|
+  # No configuration needed for now
 end
